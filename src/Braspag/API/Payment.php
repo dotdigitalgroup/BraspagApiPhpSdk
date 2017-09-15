@@ -94,6 +94,8 @@ class Payment implements \JsonSerializable
 
     private $address;
 
+    private $instructions;
+
     public function __construct($amount = 0, $installments = 1)
     {
         $this->setAmount($amount);
@@ -159,6 +161,7 @@ class Payment implements \JsonSerializable
 
         $this->links = isset($data->Links)? $data->Links: [];
         $this->extraDataCollection = isset($data->ExtraDataCollection)? $data->ExtraDataCollection: [];
+        $this->instructions = isset($data->Instructions)? $data->Instructions: null;
     }
 
     public static function fromJson($json)
@@ -617,6 +620,17 @@ class Payment implements \JsonSerializable
     public function setAddress($address)
     {
         $this->address = $address;
+        return $this;
+    }
+
+    public function getInstructions()
+    {
+        return $this->instructions;
+    }
+
+    public function setInstructions($instructions)
+    {
+        $this->instructions = $instructions;
         return $this;
     }
 }
